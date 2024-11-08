@@ -1,12 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Sensor } from '../../shared/types/sensor.type';
+import { MockDataService } from '../../shared/services/mock-data.service';
+import { Subject, takeUntil } from 'rxjs';
+import { BaseDataService } from '../../shared/services/base-data.service';
 
 @Component({
-  selector: 'app-devices',
-  standalone: true,
-  imports: [],
-  templateUrl: './devices.component.html',
-  styleUrl: './devices.component.css'
+    selector: 'app-devices',
+    standalone: true,
+    imports: [],
+    templateUrl: './devices.component.html',
+    styleUrl: './devices.component.css',
 })
-export class DevicesComponent {
+export class DevicesComponent implements OnInit, OnDestroy {
+    private unsub$: Subject<void> = new Subject<void>();
+    public sensors: Sensor[] = [];
+    constructor(private dataService: BaseDataService) {}
 
+    ngOnInit(): void {
+        this.dataService
+            .getSensorData()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe({
+                next: (data) => {
+                    this.sensors = data;
+                },
+                error: (err) => {
+                    console.error(err);
+                },
+
+                complete: () => {
+                    console.log('complete');
+                },
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.unsub$.next();
+    }
 }
