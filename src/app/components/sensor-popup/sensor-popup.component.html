@@ -1,0 +1,79 @@
+<div class="flex flex-col gap-2 bg-white">
+    <div class="relative flex justify-between">
+        <div class="flex flex-col gap-1">
+            @switch (popupState) { @case (PopupState.INFORMATION) {
+            <span class="font-medium text-black">Sıcaklık ve Nem Sensörü</span>
+            } @case (PopupState.TEMPERATURE) {
+            <span class="font-medium text-primary-dark"
+                ><b>Sıcaklık</b> Sensörü</span
+            >
+            } @case (PopupState.HUMIDITY) {
+            <span class="font-medium text-primary-dark"
+                ><b>Nem</b> Sensörü</span
+            >
+            } }
+            <span class="text-gray">{{ sensor.label }}</span>
+        </div>
+        <img
+            class="absolute -right-8 -top-10"
+            src="assets/icons/map-pin.svg"
+            alt=""
+        />
+    </div>
+    @switch (popupState) { @case (PopupState.INFORMATION) {
+    <div class="grid grid-cols-8 gap-3 grid-rows-2 items-center">
+        <img
+            class="col-span-1"
+            src="assets/icons/temperature.svg"
+            alt="temperature"
+        />
+        <span class="col-span-2 font-medium">{{ sensor.tempature() }} °C</span>
+        <button
+            (click)="setPage(PopupState.TEMPERATURE)"
+            class="col-span-5 rounded whitespace-nowrap shadow px-4 py-2 bg-primary-light text-center text-primary-dark"
+        >
+            <b>Sıcaklık</b> Ayarla
+        </button>
+        <img
+            class="col-span-1"
+            src="assets/icons/humidity.svg"
+            alt="temperature"
+        />
+        <span class="col-span-2 font-medium">% {{ sensor.humidity() }}</span>
+        <button
+            (click)="setPage(PopupState.HUMIDITY)"
+            class="col-span-5 rounded whitespace-nowrap shadow px-4 py-2 bg-primary-light text-center text-primary-dark"
+        >
+            <b>Nem</b> Ayarla
+        </button>
+    </div>
+    } @case (PopupState.TEMPERATURE) {
+    <div class="grid grid-cols-2 grid-rows-3 gap-2">
+        <span class="col-span-1 text-start">Mevcut</span>
+        <span class="col-span-1 text-start">Yeni</span>
+        <div class="col-span-1 flex items-center gap-2">
+            <img src="assets/icons/temperature.svg" alt="temperature" />
+            <span>{{ sensor.tempature() }} °C</span>
+        </div>
+        <input
+            (input)="temperatureChange($event)"
+            class="col-span-1"
+            type="number"
+        />
+        <button
+            (click)="cancel()"
+            class="col-span-1 text-center border border-primary rounded-lg text-primary px-4 py-2"
+        >
+            İptal et
+        </button>
+        <button
+            (click)="updateTemperature()"
+            class="col-span-1 text-center bg-primary text-white rounded-lg px-4 py-2"
+        >
+            Güncelle
+        </button>
+    </div>
+    } @case (PopupState.HUMIDITY) {
+    <div>hum</div>
+    } }
+</div>
