@@ -3,25 +3,43 @@
 @tailwind components;
 @tailwind utilities;
 
-.leaflet-popup-tip {
-	display: none !important;
-	box-shadow: none !important;
+@layer base {
+    img {
+        -webkit-user-drag: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f2f9ff;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #007dfc;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #0060c0;
+    }
 }
 
+.leaflet-popup-tip {
+    display: none !important;
+    box-shadow: none !important;
+}
 
 /* .leaflet-popup-content {
-	margin: 0 0 0 0 !important;
-	padding: 0 0 0 0 !important;
-	border: none !important;
-	border-radius: 0 !important;
-}
-.leaflet-popup-content-wrapper {
-	margin: 0 0 0 0 !important;
-	padding: 0 0 0 0 !important;
-	border: none !important;
-	border-radius: 0 !important;
-} */
-
-.popup {
-	@apply bg-primary-light;
-}
+		margin: 0 0 0 0 !important;
+		padding: 0 0 0 0 !important;
+		border: none !important;
+		border-radius: 0 !important;
+		}
+		.leaflet-popup-content-wrapper {
+			margin: 0 0 0 0 !important;
+			padding: 0 0 0 0 !important;
+			border: none !important;
+			border-radius: 0 !important;
+			} */
