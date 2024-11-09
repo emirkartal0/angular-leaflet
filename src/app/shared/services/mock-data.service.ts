@@ -9,7 +9,7 @@ import { BaseDataService } from './base-data.service';
 export class MockDataService extends BaseDataService {
     private readonly sensorLocations: string[] = [
         '1 nolu kapı',
-        '1 nolu kapı',
+        '2 nolu kapı',
         'Salon',
         'Çalışma Odası',
         'Yatak Odası',
@@ -19,8 +19,8 @@ export class MockDataService extends BaseDataService {
     ];
 
     private sensorData: Sensor[] = [];
-	public selectedSensorId$: Subject<string> = new Subject();
-	public unSelectedSensorId$: Subject<string> = new Subject();
+    public selectedSensorId$: Subject<string> = new Subject();
+    public unSelectedSensorId$: Subject<string> = new Subject();
 
     constructor() {
         super();
@@ -32,10 +32,10 @@ export class MockDataService extends BaseDataService {
     }
 
     public selectSensor(id: string): void {
-		this.sensorData.forEach((sensor) => {
-			sensor.isSelected.set(false);
-		})
-		this.selectedSensorId$.next(id);
+        this.sensorData.forEach((sensor) => {
+            sensor.isSelected.set(false);
+        });
+        this.selectedSensorId$.next(id);
         this.sensorData
             .find((sensor) => sensor.id === id)
             ?.isSelected.set(true);
@@ -47,7 +47,7 @@ export class MockDataService extends BaseDataService {
             ?.isSelected.set(false);
     }
 
-    private generateMockData() {
+    private generateMockData(): void {
         for (const location of this.sensorLocations) {
             this.sensorData.push({
                 id: crypto.randomUUID(),
