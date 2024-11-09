@@ -10,17 +10,20 @@ import { Subject, takeUntil } from 'rxjs';
 import { BaseDataService } from '../../shared/services/base-data.service';
 import { SensorCardComponent } from '../sensor-card/sensor-card.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-devices',
     standalone: true,
-    imports: [SensorCardComponent, CommonModule],
+    imports: [FormsModule, SensorCardComponent, CommonModule],
     templateUrl: './devices.component.html',
     styleUrl: './devices.component.css',
 })
 export class DevicesComponent implements OnInit, OnDestroy {
     private unsub$: Subject<void> = new Subject<void>();
-    public sensors: Sensor[] = [];
+    private sensors: Sensor[] = [];
+    public filteredSensors: Sensor[] = [];
+    public searchQuery: string = '';
 
     constructor(private dataService: BaseDataService) {}
 
@@ -31,6 +34,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.sensors = data;
+                    this.filteredSensors = data;
                 },
                 error: (err) => {
                     console.error(err);
@@ -49,6 +53,13 @@ export class DevicesComponent implements OnInit, OnDestroy {
                     block: 'center',
                 });
             });
+    }
+
+    filterSensors(): void {
+        const query = this.searchQuery.toLowerCase();
+        this.filteredSensors = this.sensors.filter((sensor) =>
+            sensor.name.toLowerCase().includes(query)
+        );
     }
 
     scrollToSensor(el: Event): void {
