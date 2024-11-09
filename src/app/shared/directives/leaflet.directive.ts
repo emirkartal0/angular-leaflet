@@ -16,6 +16,7 @@ import {
 import { SensorPopupComponent } from '../../components/sensor-popup/sensor-popup.component';
 import { BaseDataService } from '../services/base-data.service';
 import { Sensor } from '../types/sensor.type';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Directive({
     selector: '[leaflet]',
@@ -25,7 +26,6 @@ export class LeafletDirective implements OnInit {
     private map!: Leaflet.Map;
     private icon!: Leaflet.Icon;
     private layer!: Leaflet.TileLayer;
-    private popupComponent?: ComponentRef<SensorPopupComponent>;
 
     constructor(
         private element: ElementRef,
@@ -54,6 +54,21 @@ export class LeafletDirective implements OnInit {
         let popupComponent: ComponentRef<SensorPopupComponent> =
             this.viewContainerRef.createComponent(SensorPopupComponent);
         popupComponent.instance.sensor = sensor;
+
+        marker.on('popupopen', () => {
+            this.dataService.selectSensor(sensor.id);
+        });
+
+        marker.on('popupclose', () => {
+			this.dataService.unselectSensor(sensor.id);
+        });
+
+		this.dataService.selectedSensorId$.subscribe((id) => {
+			if (id === sensor.id) {
+				marker.openPopup();
+			}
+		})
+
         marker
             .bindPopup(popupComponent.location.nativeElement, {
                 closeButton: false,
@@ -70,7 +85,7 @@ export class LeafletDirective implements OnInit {
             iconAnchor: [18, 56],
             popupAnchor: [-90, 60],
             shadowSize: [41, 41],
-            className: 'z-50'
+            className: 'z-50',
         });
 
         this.layer = Leaflet.tileLayer(OPEN_STREET_MAP, {

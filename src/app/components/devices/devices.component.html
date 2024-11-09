@@ -1,9 +1,7 @@
 <div class="shadow-lg rounded-xl overflow-hidden p-5">
     <div class="grid grid-cols-2 gap-4 w-full h-[600px] overflow-y-scroll px-5">
         @for (sensor of sensors; track $index) {
-            <div class="md:col-span-1 col-span-2 h-40 border rounded-2xl">
-                {{ sensor.label }}
-            </div>
+            <app-sensor-card class="md:col-span-1 col-span-2" [sensor]="sensor" ></app-sensor-card>
         }
     </div>
 </div>

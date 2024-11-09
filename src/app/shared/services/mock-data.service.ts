@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Sensor } from '../types/sensor.type';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { BaseDataService } from './base-data.service';
 
 @Injectable({
@@ -19,24 +19,40 @@ export class MockDataService extends BaseDataService {
     ];
 
     private sensorData: Sensor[] = [];
+	public selectedSensorId$: Subject<string> = new Subject();
 
     constructor() {
         super();
         this.generateMockData();
     }
 
-    getSensorData(): Observable<Sensor[]> {
+    public getSensorData(): Observable<Sensor[]> {
         return of(this.sensorData);
+    }
+
+    public selectSensor(id: string): void {
+		this.sensorData.forEach((sensor) => {
+			sensor.isSelected.set(false);
+		})
+		this.selectedSensorId$.next(id);
+        this.sensorData
+            .find((sensor) => sensor.id === id)
+            ?.isSelected.set(true);
+    }
+
+    public unselectSensor(id: string): void {
+        this.sensorData
+            .find((sensor) => sensor.id === id)
+            ?.isSelected.set(false);
     }
 
     private generateMockData() {
         for (const location of this.sensorLocations) {
             this.sensorData.push({
                 id: crypto.randomUUID(),
-                name: 'Sıcaklık ve Nem Sensörü',
-                label: location,
+                name: location,
                 isSelected: signal(false),
-                tempature: signal(Math.round(Math.random() * 25 + 10)),
+                temperature: signal(Math.round(Math.random() * 25 + 10)),
                 humidity: signal(Math.round(Math.random() * 15 + 15)),
                 battery: Math.random() * 100,
                 latitude: Math.random() * 5 + 37,

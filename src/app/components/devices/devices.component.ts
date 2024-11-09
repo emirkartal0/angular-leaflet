@@ -3,11 +3,12 @@ import { Sensor } from '../../shared/types/sensor.type';
 import { MockDataService } from '../../shared/services/mock-data.service';
 import { Subject, takeUntil } from 'rxjs';
 import { BaseDataService } from '../../shared/services/base-data.service';
+import { SensorCardComponent } from "../sensor-card/sensor-card.component";
 
 @Component({
     selector: 'app-devices',
     standalone: true,
-    imports: [],
+    imports: [SensorCardComponent],
     templateUrl: './devices.component.html',
     styleUrl: './devices.component.css',
 })
