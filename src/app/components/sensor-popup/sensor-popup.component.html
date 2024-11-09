@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 bg-white">
+<div class="flex flex-col gap-2 bg-white h-[155px]">
     <div class="relative flex justify-between">
         <div class="flex flex-col gap-1">
             @switch (popupState) { @case (PopupState.INFORMATION) {
@@ -22,30 +22,30 @@
         />
     </div>
     @switch (popupState) { @case (PopupState.INFORMATION) {
-        <div class="grid grid-cols-8 gap-3 grid-rows-2 items-center">
+        <div class="grid grid-cols-9 grid-rows-4 h-full items-center text-base text-nowrap">
             <img
-                class="col-span-1"
+                class="col-span-1 row-span-2 pr-1"
                 src="assets/icons/temperature.svg"
                 alt="temperature"
             />
-            <span class="col-span-2 font-medium"
+            <span class="col-span-2 row-span-2 font-medium"
                 >{{ sensor.temperature() }} °C</span
             >
             <button
                 (click)="setPage(PopupState.TEMPERATURE)"
-                class="col-span-5 rounded whitespace-nowrap shadow px-4 py-2 bg-primary-light text-center text-primary-dark"
+                class="col-span-6 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-base text-primary-dark"
             >
                 <b>Sıcaklık</b> Ayarla
             </button>
             <img
-                class="col-span-1"
+                class="col-span-1 row-span-2 pr-1"
                 src="assets/icons/humidity.svg"
                 alt="temperature"
             />
-            <span class="col-span-2 font-medium">% {{ sensor.humidity() }}</span>
+            <span class="col-span-2 row-span-2 font-medium">% {{ sensor.humidity() }}</span>
             <button
                 (click)="setPage(PopupState.HUMIDITY)"
-                class="col-span-5 rounded whitespace-nowrap shadow px-4 py-2 bg-primary-light text-center text-primary-dark"
+                class="col-span-6 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-center text-base text-primary-dark"
             >
                 <b>Nem</b> Ayarla
             </button>

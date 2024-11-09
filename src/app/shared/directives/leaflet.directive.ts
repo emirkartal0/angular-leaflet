@@ -89,7 +89,7 @@ export class LeafletDirective implements OnInit {
         this.icon = Leaflet.icon({
             iconUrl: 'assets/icons/map-pin.svg',
             iconAnchor: [18, 56],
-            popupAnchor: [-90, 60],
+            popupAnchor: [-112, 166],
             shadowSize: [41, 41],
             className: 'z-50',
         });
