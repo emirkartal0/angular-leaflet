@@ -24,28 +24,28 @@
     @switch (popupState) { @case (PopupState.INFORMATION) {
         <div class="grid grid-cols-9 grid-rows-4 h-full items-center text-base text-nowrap">
             <img
-                class="col-span-1 row-span-2 pr-1"
+                class="col-span-1 row-span-2 pr-2"
                 src="assets/icons/temperature.svg"
                 alt="temperature"
             />
-            <span class="col-span-2 row-span-2 font-medium"
+            <span class="col-span-3 row-span-2 font-medium"
                 >{{ sensor.temperature() }} °C</span
             >
             <button
                 (click)="setPage(PopupState.TEMPERATURE)"
-                class="col-span-6 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-base text-primary-dark"
+                class="col-span-5 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-base text-primary-dark"
             >
                 <b>Sıcaklık</b> Ayarla
             </button>
             <img
-                class="col-span-1 row-span-2 pr-1"
+                class="col-span-1 row-span-2 pr-2"
                 src="assets/icons/humidity.svg"
                 alt="temperature"
             />
-            <span class="col-span-2 row-span-2 font-medium">% {{ sensor.humidity() }}</span>
+            <span class="col-span-3 row-span-2 font-medium">% {{ sensor.humidity() }}</span>
             <button
                 (click)="setPage(PopupState.HUMIDITY)"
-                class="col-span-6 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-center text-base text-primary-dark"
+                class="col-span-5 row-span-2 rounded whitespace-nowrap shadow-lg px-4 py-2 bg-primary-light text-center text-base text-primary-dark"
             >
                 <b>Nem</b> Ayarla
             </button>
@@ -68,7 +68,8 @@
                 <input
                     (input)="temperatureChange($event)"
                     type="number"
-                    id="input-group-1"
+                    min="-273.17"
+                    max="100"
                     class="bg-white border border-gray text-black text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-2 p-2 px-4"
                     placeholder=""
                 />
@@ -105,7 +106,8 @@
                 <input
                     (input)="humidityChange($event)"
                     type="number"
-                    id="input-group-1"
+                    min="0"
+                    max="100"
                     class="bg-white border border-gray text-black text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ps-7 p-2 px-4"
                     placeholder=""
                 />

@@ -10,18 +10,19 @@ import { BaseDataService } from '../../shared/services/base-data.service';
     templateUrl: './sensor-popup.component.html',
     styleUrl: './sensor-popup.component.css',
 })
-export class SensorPopupComponent implements OnInit{    
+export class SensorPopupComponent implements OnInit {
     @Input() sensor!: Sensor;
+    
     protected PopupState = PopupState;
     protected popupState: PopupState = PopupState.INFORMATION;
 
-    newTemperature: number = 0;
-    newHumidity: number = 0;
+    private newTemperature?: number;
+    private newHumidity?: number;
 
     constructor(private dataService: BaseDataService) {}
 
     ngOnInit(): void {
-      this.sensor.isSelected.set(false);  
+        this.sensor.isSelected.set(false);
     }
     temperatureChange(e: Event) {
         const inputEl = e.target as HTMLInputElement;
@@ -30,6 +31,12 @@ export class SensorPopupComponent implements OnInit{
     }
 
     updateTemperature() {
+        if (
+            !this.newTemperature ||
+            this.newTemperature < -273.17 ||
+            this.newTemperature > 100
+        )
+            return;
         this.sensor.temperature.set(this.newTemperature);
         this.setPage(PopupState.INFORMATION);
     }
@@ -41,6 +48,8 @@ export class SensorPopupComponent implements OnInit{
     }
 
     updateHumidity() {
+        if (!this.newHumidity || this.newHumidity < 0 || this.newHumidity > 100)
+            return;
         this.sensor.humidity.set(this.newHumidity);
         this.setPage(PopupState.INFORMATION);
     }

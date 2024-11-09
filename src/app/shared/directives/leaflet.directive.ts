@@ -78,7 +78,7 @@ export class LeafletDirective implements OnInit {
         marker
             .bindPopup(popupComponent.location.nativeElement, {
                 closeButton: false,
-                minWidth: 200,
+                minWidth: 250,
                 className: 'shadow-xl',
             })
             .openPopup()
@@ -89,7 +89,7 @@ export class LeafletDirective implements OnInit {
         this.icon = Leaflet.icon({
             iconUrl: 'assets/icons/map-pin.svg',
             iconAnchor: [18, 56],
-            popupAnchor: [-112, 166],
+            popupAnchor: [-137, 166],
             shadowSize: [41, 41],
             className: 'z-50',
         });
