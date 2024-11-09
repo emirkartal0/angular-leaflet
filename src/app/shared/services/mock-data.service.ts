@@ -22,6 +22,8 @@ export class MockDataService extends BaseDataService {
     public selectedSensorId$: Subject<string> = new Subject();
     public unSelectedSensorId$: Subject<string> = new Subject();
 
+    private startTime = Date.now();
+
     constructor() {
         super();
         this.generateMockData();
@@ -35,7 +37,11 @@ export class MockDataService extends BaseDataService {
         this.sensorData.forEach((sensor) => {
             sensor.isSelected.set(false);
         });
-        this.selectedSensorId$.next(id);
+
+        if (this.startTime + 100 < Date.now()) { // leaflet.directive (line:98) => to prevent open and close events in the directive
+            this.selectedSensorId$.next(id);
+        }
+
         this.sensorData
             .find((sensor) => sensor.id === id)
             ?.isSelected.set(true);

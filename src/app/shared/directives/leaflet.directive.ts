@@ -60,20 +60,33 @@ export class LeafletDirective implements OnInit {
         });
 
         marker.on('popupclose', () => {
-			this.dataService.unselectSensor(sensor.id);
+            this.dataService.unselectSensor(sensor.id);
         });
 
-		this.dataService.selectedSensorId$.subscribe((id) => {
-			if (id === sensor.id) {
-				marker.openPopup();
-			}
-		})
+        this.dataService.selectedSensorId$.subscribe((id) => {
+            this.dataService.getSensorData().subscribe((data: Sensor[]) => {
+                data.forEach((sensorData) => {
+                    if (id === sensorData.id) {
+                        this.map.flyTo(
+                            [sensorData.latitude, sensorData.longitude],
+                            12,
+                            {
+                                animate: true,
+                            }
+                        );
+                    }
+                });
+            });
+            if (id === sensor.id) {
+                marker.openPopup();
+            }
+        });
 
-		this.dataService.unSelectedSensorId$.subscribe((id) => {
-			if (id === sensor.id) {
-				marker.closePopup();
-			}
-		})
+        this.dataService.unSelectedSensorId$.subscribe((id) => {
+            if (id === sensor.id) {
+                marker.closePopup();
+            }
+        });
 
         marker
             .bindPopup(popupComponent.location.nativeElement, {
