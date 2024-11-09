@@ -20,6 +20,7 @@ export class MockDataService extends BaseDataService {
 
     private sensorData: Sensor[] = [];
 	public selectedSensorId$: Subject<string> = new Subject();
+	public unSelectedSensorId$: Subject<string> = new Subject();
 
     constructor() {
         super();

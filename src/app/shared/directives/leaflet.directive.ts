@@ -69,6 +69,12 @@ export class LeafletDirective implements OnInit {
 			}
 		})
 
+		this.dataService.unSelectedSensorId$.subscribe((id) => {
+			if (id === sensor.id) {
+				marker.closePopup();
+			}
+		})
+
         marker
             .bindPopup(popupComponent.location.nativeElement, {
                 closeButton: false,
