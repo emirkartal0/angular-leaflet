@@ -58,7 +58,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
     filterSensors(): void {
         const query = this.searchQuery.toLowerCase();
         this.filteredSensors = this.sensors.filter((sensor) =>
-            sensor.name.toLowerCase().includes(query)
+            sensor.name.toLowerCase().includes(query),
         );
     }
 

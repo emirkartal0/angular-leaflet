@@ -12,7 +12,7 @@ import { BaseDataService } from '../../shared/services/base-data.service';
 })
 export class SensorPopupComponent implements OnInit {
     @Input() sensor!: Sensor;
-    
+
     protected PopupState = PopupState;
     protected popupState: PopupState = PopupState.INFORMATION;
 

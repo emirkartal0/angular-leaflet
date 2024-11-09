@@ -31,8 +31,8 @@
         margin: 0;
     }
 
-    input[type="number"] {
-		appearance: textfield;
+    input[type='number'] {
+        appearance: textfield;
         -moz-appearance: textfield;
     }
 }
@@ -41,4 +41,3 @@
     display: none !important;
     box-shadow: none !important;
 }
-

@@ -11,11 +11,11 @@
             <span class="text-black/50 text-base">{{ sensor.name }}</span>
         </div>
         @if (sensor.battery < 20) {
-        <img src="assets/icons/low-battery.svg" alt="battery" />
+            <img src="assets/icons/low-battery.svg" alt="battery" />
         } @else if (sensor.battery < 60) {
-        <img src="assets/icons/mid-battery.svg" alt="battery" />
+            <img src="assets/icons/mid-battery.svg" alt="battery" />
         } @else {
-        <img src="assets/icons/high-battery.svg" alt="battery" />
+            <img src="assets/icons/high-battery.svg" alt="battery" />
         }
     </div>
 
@@ -27,7 +27,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-        <span class="text-xs pt-1" >{{ sensor.date | dateTime }}</span>
-        <img src="assets/icons/temperature-solid.svg" alt="">
+        <span class="text-xs pt-1">{{ sensor.date | dateTime }}</span>
+        <img src="assets/icons/temperature-solid.svg" alt="" />
     </div>
 </div>

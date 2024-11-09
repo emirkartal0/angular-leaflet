@@ -38,7 +38,8 @@ export class MockDataService extends BaseDataService {
             sensor.isSelected.set(false);
         });
 
-        if (this.startTime + 100 < Date.now()) { // leaflet.directive (line:98) => to prevent open and close events in the directive
+        if (this.startTime + 100 < Date.now()) {
+            // leaflet.directive (line:98) => to prevent open and close events in the directive
             this.selectedSensorId$.next(id);
         }
 
@@ -65,7 +66,7 @@ export class MockDataService extends BaseDataService {
                 latitude: Math.random() * 5 + 37,
                 longitude: Math.random() * 18 + 27,
                 date: new Date(
-                    Date.now() - Math.random() * 1000 * 60 * 60 * 24
+                    Date.now() - Math.random() * 1000 * 60 * 60 * 24,
                 ),
             });
         }

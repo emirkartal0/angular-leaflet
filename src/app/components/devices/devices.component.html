@@ -34,16 +34,18 @@
         class="grid grid-cols-6 auto-rows-min gap-4 w-full overflow-hidden h-[620px] overflow-y-scroll p-5"
     >
         @for (sensor of filteredSensors; track $index) {
-        <app-sensor-card
-            class="md:col-span-2 xl:col-span-3 col-span-6"
-            [sensor]="sensor"
-            (click)="scrollToSensor($event)"
-            [id]="sensor.id"
-        ></app-sensor-card>
+            <app-sensor-card
+                class="md:col-span-2 xl:col-span-3 col-span-6"
+                [sensor]="sensor"
+                (click)="scrollToSensor($event)"
+                [id]="sensor.id"
+            ></app-sensor-card>
         } @empty {
-        <div class="col-span-6 text-center font-bold w-full text-nowrap pt-6">
-            Sensor bulunamadı.
-        </div>
+            <div
+                class="col-span-6 text-center font-bold w-full text-nowrap pt-6"
+            >
+                Sensor bulunamadı.
+            </div>
         }
     </div>
 </div>

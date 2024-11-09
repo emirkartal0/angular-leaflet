@@ -30,7 +30,7 @@ export class LeafletDirective implements OnInit {
     constructor(
         private element: ElementRef,
         private viewContainerRef: ViewContainerRef,
-        private dataService: BaseDataService
+        private dataService: BaseDataService,
     ) {
         this.initializeAssets();
     }
@@ -72,7 +72,7 @@ export class LeafletDirective implements OnInit {
                             12,
                             {
                                 animate: true,
-                            }
+                            },
                         );
                     }
                 });
