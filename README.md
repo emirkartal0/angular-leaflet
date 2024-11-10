@@ -1,27 +1,17 @@
-# LeafletAngular
+# Leaflet-Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+Projede, Angular'ın en güncel özelliklerini kullanarak kurumsal düzeyde Angular uygulamalarının nasıl geliştirileceğine dair temel prensipler ve yapıları göstermeyi amaçladım.
 
-## Development server
+## Teknik Özellikler
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-   **Leaflet Harita Entegrasyonu**: Leaflet harita kütüphanesi, Angular directives kullanılarak entegre edildi. Leaflet haritasını bir directive olarak tanımlayarak, bu haritayı farklı bileşenlerde veya sayfalarda kullanılması amaçlandı. Leaflet gibi harita kütüphaneleri DOM üzerinde işlem yaptığı için directives kullanmak iyi performans veriyordu. Ayrıca harita kütüphanesini componentlerden ayırarak kodun modülerliğini arttırırken, bağımlılıkları da azaltılmış oldu.
 
-## Code scaffolding
+-   **Mock Data Servisi**: Gerçek zamanlı veri akışını simüle etmek için RxJS kullanılarak bir mock-data servisi oluşturulmuştur. Bu servis, geliştirme ortamında kullanılmak üzere tasarlanmıştır. `BaseDataService` sınıfı, veri servisleri için bir abstraction katmanı sağlar. Bu yapı, farklı veri kaynaklarının (örneğin, mock veya gerçek veri servisleri) kolayca entegre edilmesine olanak tanır.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Kod Kalitesi ve Standartlar
 
-## Build
+-   **Signal'ler**: Projede, Angular'ın ilerleyen versiyonlarında adını sıkça duyacağımız Zoneless kavramı içinde kritik olan signal'ler kullanılmıştır. Signal'ler gerek RxJS ile uyumlu çalışması gerekse kolay kullanımıyla uygulamanın performansını arttıracak önemli etkenlerden biridir.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-   **Commit Standartları**: Projede, commit mesajları için Conventional Commits standartları kullanılmıştır. Bu, değişikliklerin daha anlaşılır ve takip edilebilir olmasını sağlar.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   **Modüler ve Ölçeklenebilir Yapı**: Proje, modüler bir yapıya sahiptir ve bu sayede kolayca ölçeklenebilir. Bileşenler ve servisler, bağımsız olarak geliştirilebilir ve test edilebilir.
